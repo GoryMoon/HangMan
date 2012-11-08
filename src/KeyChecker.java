@@ -1,8 +1,11 @@
+/**
+ * Handels the key checking methods.
+ */
 public class KeyChecker {
 	
 	public static char[] correctWord = null;
 
-	
+	public static int scorep;
 	public KeyChecker(int lenght){
 		int i = 1;
 		String string = "";
@@ -14,8 +17,24 @@ public class KeyChecker {
 		
 	}
 	
-	public static boolean compareLetters(char word) {
-		char[] words = Words.getChars();
+	/**
+	* Get a character and compare it to the random
+	* word that is generated in {@link Words}.
+	* @param word
+	* 			A char that is going to be cheked if it's match.
+	* @param oWord
+	*			The word to compare to.
+	* @param print
+	*			If it's  to print and compare the input.
+	* @return True if it's a match, else false
+	*/
+	public static boolean compareLetters(char word, char[] cWord, boolean print) {
+		char[] words = null;
+		if (print){
+			words = Words.getChars();
+		}else{
+			words = cWord;
+		}
 		String wordS = "";
 		String wordsS = "";
 		int o = 0;
@@ -23,9 +42,12 @@ public class KeyChecker {
 			wordsS = Character.toString(words[i]);
 			wordS = Character.toString(word);
 			if (wordS.equalsIgnoreCase(wordsS)) {
-				correctWord[i] = word;
-				Screen.print(correctWord,false);
-				System.out.println(Screen.arrayToString(correctWord));
+				if (print){
+					correctWord[i] = word;
+					scorep += 10;
+					Screen.print(correctWord,false);
+					System.out.println(Screen.arrayToString(correctWord));
+				}
 				o = 1;
 		 	}
 		}
@@ -34,7 +56,27 @@ public class KeyChecker {
 		}
 		return false;
 	}
+	/**
+	* Get a character and compare it to the random
+	* word that is generated in {@link Words}.
+	* Lower amount of params and is used to
+	* print and compare the input.
+	* @param word
+	*			The word to compare to.
+	*/
+	public static boolean compareLetters(char word) {
+		boolean status = compareLetters(word, correctWord,true);
+		return status;
+	}
 
+	
+	/**
+	* Takes a char[] array to check if it's any 
+	* underlines left in the array.
+	* @param words
+	*			The char[] array to check.
+	* @return True if not underscore, else false.
+	*/
 	public static boolean checkIfAllDone(char[] words) {
 		String letter = "";
 		int correct = 0;

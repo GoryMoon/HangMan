@@ -20,6 +20,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 
 @SuppressWarnings("unused")
+/**
+ * Handels all related to the screen and more.
+ * It's kind of the core. 
+ */
 public class Screen extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -33,46 +37,12 @@ public class Screen extends JFrame {
 	static Logger logger = Logger.getLogger("Hangman");
 	static boolean done = false;
 	static int triesLeft = 10;
+	static int scorep = 0;
 
-	// Convert an array of strings to one string.
-	// Put the 'separator' string between each element.
-
-	public static String arrayToString(char[] words) {
-		StringBuffer result = new StringBuffer();
-		if (words.length > 0) {
-			result.append(words[0]);
-			for (int i = 1; i < words.length; i++) {
-				result.append(" ");
-				result.append(words[i]);
-			}
-		}
-		return result.toString();
-	}
-	
-	public static void print(char[] word, JLabel jlbempty, int strLenght,
-			boolean first, boolean finalp) {
-		jlab = jlbempty;
-		String string = "";
-		int i = 1;
-		if (first) {
-			while (i <= strLenght) {
-				string += "_ ";
-				i++;
-			}
-		} else {
-			string = arrayToString(word);
-		}
-			tries.setText("Tries left: "+triesLeft);
-			jlbempty.setText(string);
-		if (finalp){
-			jlbempty.setText("Well Done");
-			jlfinal.setText("Hit any button to continue");
-			System.out.println("User finished the word: " + Screen.arrayToString(word));
-			logger.log(Level.FINEST, "User have finished the word: "+ Screen.arrayToString(word));
-			done = true;
-		}
-	}
-
+	/**
+	* The main method of this class that's the core of everything.
+	* This run all the other classes and makes  it work.
+	*/
 	public Screen() {
 		super("Hangman Demo");
 		JButton button = new JButton("Randomise Word");
@@ -94,7 +64,7 @@ public class Screen extends JFrame {
 		// Create and add simple menu item to one of the drop down menu
 		JMenuItem debugAction = new JMenuItem("Console");
 		JMenuItem exitAction = new JMenuItem("Exit");
-		JMenuItem changeWordAction = new JMenuItem("Change Word");
+		JMenuItem changeWordAction = new JMenuItem("New Word");
 		// Create and add CheckButton as a menu item to one of the drop down
 		// menu
 		// JCheckBoxMenuItem checkAction = new
@@ -189,30 +159,130 @@ public class Screen extends JFrame {
 		setVisible(true);
 		Words.searchForWord("words.txt", jlbempty);
 	}
+
+	/**
+	* Convert an char[] array of strings to one string.
+	* Put the 'separator' string between each element.
+	* @param words
+	*			A char[] array.
+	* @return The Array as String
+	*/
+	public static String arrayToString(char[] words) {
+		StringBuffer result = new StringBuffer();
+		if (words.length > 0) {
+			result.append(words[0]);
+			for (int i = 1; i < words.length; i++) {
+				result.append(" ");
+				result.append(words[i]);
+			}
+		}
+		return result.toString();
+	}
+	
+	/**
+	* Prints the char[] array on the JLabel on the screen.
+	* 
+	* @param word
+	*			The char[] array to print to the JLabel.
+	* @param jlbempty
+	*			The JLabel to print to.
+	* @param strLenght
+	*			The lenght of the char[] array printed counted as a string.
+	* @param first
+	*			If it's the first time runned.
+	* @param finalp
+	*			If it's the last time runned.
+	*/
+	public static void print(char[] word, JLabel jlbempty, int strLenght,
+			boolean first, boolean finalp) {
+		jlab = jlbempty;
+		String string = "";
+		int i = 1;
+		scorep = KeyChecker.scorep;
+		score.setText("Your Score: "+scorep);
+		tries.setText("Tries left: "+triesLeft);
+		if (first) {
+			tries.setText("Tries left: 10");
+			while (i <= strLenght) {
+				string += "_ ";
+				i++;
+			}
+		} else {
+			string = arrayToString(word);
+		}
+			jlbempty.setText(string);
+		if (finalp){
+			jlbempty.setText("Well Done");
+			jlfinal.setText("Hit any button to continue");
+			System.out.println("User finished the word: " + Screen.arrayToString(word));
+			logger.log(Level.FINEST, "User have finished the word: "+ Screen.arrayToString(word));
+			done = true;
+		}
+	}
+
+	/**
+	* An print that don't need all the @params for easier print.
+	* This is with the option of FirstPrint it.
+	* @param printText
+	*			The text to print to the JLabel.
+	* @param firstPrint
+	* 			If it's the first print or not.
+	*/
 	public static void print(char[] printText, boolean firstPrint) {
 		print(printText, jlbempty, Words.getWordlenght(), firstPrint, false);
 	}
 
+	/**
+	* An print that don't need all the @params for easier print.
+	* This is with the option of FinalPrint it.
+	* @param printText
+	*			The text to print to the JLabel.
+	* @param firstPrint
+	* 			If it's the last print or not.
+	*/
 	public static void finalPrint(char[] printText, boolean lastPrint) {
 		print(printText, jlbempty, Words.getWordlenght(), false,lastPrint);
 	}
+
+	/**
+	* An print that don't need all the @params for easier print.
+	* This is just a regular print.
+	* @param printText
+	*			The text to print to the JLabel.
+	*/
 	public static void print(String printText) {
 		print(Words.splitWordChar(printText), jlbempty, Words.getWordlenght(), false, false);
 	}
 
-	
+	/**
+	* It returns the typingarea where the user types it's letters.
+	* @return typingArea
+	*			The user input
+	*/
 	public static JTextField getTypingArea() {
 		return typingArea;
 	}
 
+	/**
+	* Restarts the HangMan game when
+	* the player wins or losses.
+	*/
 	public static void restart() {		
 		done = false;
 		triesLeft = 10;
+		HangManKeyListener.setPressedKeyArray(Words.splitWordChar(""));
 		jlfinal.setText(null);
 		Words.searchForWord("words.txt", jlbempty);
 	}
 
+	/**
+	* Do the Informtion for the user when he/she losses and
+	* put information to the console and log.
+	* @param word
+	*			The String that got printed in log and console.
+	*/
 	public static void Lose(String word) {
+		scorep -= 20;
 		jlbempty.setText("You Lose");
 		jlfinal.setText("Hit any button to continue");
 		System.out.println("User failed the word: " + word);

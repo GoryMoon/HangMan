@@ -12,6 +12,11 @@ public class HangmanFormatter extends Formatter {
 		super();
 	}
 
+	/**
+	* Formates the Log before it get put in to the file.
+	* @param record
+	*			The log record provided by a log.
+	*/
 	public String format(LogRecord record) {
 		
 		// Create a StringBuffer to contain the formatted record

@@ -7,10 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JLabel;
-
 /**
- * @author Gory Moon
- * @version 1.04
+ * Methods for the random word used in the game. 
  */
 public class Words {
 	static Logger logger = Logger.getLogger("Hangman");
@@ -22,7 +20,7 @@ public class Words {
 	private static char[] word;
 
 	/**
-	 * Gets the rline variable
+	 * Gets the words line variable
 	 * 
 	 * @return The random line
 	 */
@@ -40,7 +38,7 @@ public class Words {
 	}
 
 	/**
-	 * Gets the Text variable
+	 * Gets the word variable
 	 * 
 	 * @return The random word
 	 */
@@ -74,7 +72,7 @@ public class Words {
 	 * Splits the word into a char array.
 	 * 
 	 * @param word
-	 *            The word
+	 *            The word in String
 	 * @return A char array of letters
 	 */
 	public static char[] splitWordChar(String word) {
@@ -86,7 +84,7 @@ public class Words {
 	 * Splits the word into an array.
 	 * 
 	 * @param word
-	 *            The word
+	 *            The word in String
 	 * @return A array of letters.
 	 */
 	public static String[] splitWordString(String word) {

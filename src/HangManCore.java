@@ -7,9 +7,12 @@ import java.util.logging.Logger;
 public class HangManCore {
 
 	/**
-	 * @param args
-	 * @throws IOException
-	 */
+	* @author Gory Moon
+ 	* @version 1.09
+	* @param args
+	* @throws IOException
+	* Core file, is used to run the program.
+	*/
 	public static void main(String[] args) throws IOException {
 
 		Logger logger = Logger.getLogger("Hangman");

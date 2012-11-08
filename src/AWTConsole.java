@@ -12,6 +12,9 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+* The console for the game if needed.
+*/
 public class AWTConsole extends WindowAdapter implements WindowListener, ActionListener, Runnable
 {
 	private Frame frame;
