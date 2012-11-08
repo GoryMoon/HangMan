@@ -1,3 +1,4 @@
+package me.gory_moon.hangman.wordprocces;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -7,6 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JLabel;
+
+import me.gory_moon.hangman.core.HangManCore;
+import me.gory_moon.hangman.core.Screen;
+import me.gory_moon.hangman.keyhandler.KeyChecker;
 /**
  * Methods for the random word used in the game. 
  */

@@ -1,3 +1,9 @@
+package me.gory_moon.hangman.keyhandler;
+
+import me.gory_moon.hangman.core.Screen;
+import me.gory_moon.hangman.score.ScoreHandler;
+import me.gory_moon.hangman.wordprocces.Words;
+
 /**
  * Handels the key checking methods.
  */
@@ -5,7 +11,6 @@ public class KeyChecker {
 	
 	public static char[] correctWord = null;
 
-	public static int scorep;
 	public KeyChecker(int lenght){
 		int i = 1;
 		String string = "";
@@ -44,7 +49,7 @@ public class KeyChecker {
 			if (wordS.equalsIgnoreCase(wordsS)) {
 				if (print){
 					correctWord[i] = word;
-					scorep += 10;
+					ScoreHandler.setScore(10,true);
 					Screen.print(correctWord,false);
 					System.out.println(Screen.arrayToString(correctWord));
 				}

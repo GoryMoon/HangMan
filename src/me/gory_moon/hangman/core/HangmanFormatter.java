@@ -1,3 +1,4 @@
+package me.gory_moon.hangman.core;
 import java.util.Date;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;

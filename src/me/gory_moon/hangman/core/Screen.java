@@ -1,3 +1,4 @@
+package me.gory_moon.hangman.core;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
@@ -19,6 +20,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 
+import me.gory_moon.hangman.keyhandler.HangManKeyListener;
+import me.gory_moon.hangman.keyhandler.KeyChecker;
+import me.gory_moon.hangman.score.ScoreHandler;
+import me.gory_moon.hangman.wordprocces.Words;
+
 @SuppressWarnings("unused")
 /**
  * Handels all related to the screen and more.
@@ -35,8 +41,8 @@ public class Screen extends JFrame {
 	static JLabel score = null;
 	static JTextField typingArea = new JTextField(20);
 	static Logger logger = Logger.getLogger("Hangman");
-	static boolean done = false;
-	static int triesLeft = 10;
+	public static boolean done = false;
+	public static int triesLeft = 10;
 	static int scorep = 0;
 
 	/**
@@ -198,7 +204,7 @@ public class Screen extends JFrame {
 		jlab = jlbempty;
 		String string = "";
 		int i = 1;
-		scorep = KeyChecker.scorep;
+		scorep = ScoreHandler.getScore();
 		score.setText("Your Score: "+scorep);
 		tries.setText("Tries left: "+triesLeft);
 		if (first) {
@@ -282,7 +288,7 @@ public class Screen extends JFrame {
 	*			The String that got printed in log and console.
 	*/
 	public static void Lose(String word) {
-		scorep -= 20;
+		ScoreHandler.setScore(10, false);
 		jlbempty.setText("You Lose");
 		jlfinal.setText("Hit any button to continue");
 		System.out.println("User failed the word: " + word);

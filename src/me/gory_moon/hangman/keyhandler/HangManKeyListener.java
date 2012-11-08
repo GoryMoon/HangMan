@@ -1,9 +1,13 @@
+package me.gory_moon.hangman.keyhandler;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JTextField;
+
+import me.gory_moon.hangman.core.Screen;
+import me.gory_moon.hangman.wordprocces.Words;
 
 /**
 * Everyting about the key that is pressed by the user.

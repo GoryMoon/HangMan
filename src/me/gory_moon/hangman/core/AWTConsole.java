@@ -1,3 +1,4 @@
+package me.gory_moon.hangman.core;
 //
 // A simple Java Console for your application (Swing version)
 // Requires Java 1.1.5 or higher
