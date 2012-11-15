@@ -51,7 +51,6 @@ public class KeyChecker {
 					correctWord[i] = word;
 					ScoreHandler.setScore(10,true);
 					Screen.print(correctWord,false);
-					System.out.println(Screen.arrayToString(correctWord));
 				}
 				o = 1;
 		 	}

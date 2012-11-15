@@ -85,10 +85,8 @@ public class HangManKeyListener implements KeyListener {
 	static char[] addArray (char[] x, char y){
 	String word = "";
 	word = Screen.arrayToString(x);
-	System.out.println(word);
 	word += y;
 	char[] result = word.toCharArray();
-	System.out.print(result);
 	return result;
   }
 
